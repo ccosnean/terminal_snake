@@ -5,6 +5,7 @@ import '../utils/terminal.dart';
 
 class Snake {
   final Queue<Point> _points = Queue();
+  final Set<Point> _foodPoints = {};
 
   Snake(Point head) {
     _points.add(head);
@@ -40,12 +41,17 @@ class Snake {
 
     _points.addFirst(newHead);
     _oldTail = _points.removeLast();
+    if (_oldTail != null) {
+      _foodPoints.remove(_oldTail!);
+    }
 
     return true;
   }
 
   void grow() {
-    _points.addFirst(_points.first);
+    final foodPoint = _points.first;
+    _foodPoints.add(foodPoint);
+    _points.addFirst(foodPoint);
   }
 
   bool isCollidingWithPoints(Set<Point> otherPoints) {
@@ -75,7 +81,6 @@ class Snake {
                     ? -1
                     : 0));
 
-
     drawChar(head, '💀');
     drawChar(ahead, '💥');
   }
@@ -84,6 +89,8 @@ class Snake {
     for (var point in _points) {
       if (point == head) {
         drawChar(point, '🟦');
+      } else if (_foodPoints.contains(point)) {
+        drawChar(point, '🟧');
       } else {
         drawChar(point, '🟩');
       }

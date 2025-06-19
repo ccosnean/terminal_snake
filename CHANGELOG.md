@@ -1,3 +1,7 @@
+## 2.0.6
+
+- draws the food position in the belly
+
 ## 2.0.5
 
 - minor refactor
