@@ -1,3 +1,7 @@
+## 2.0.5
+
+- minor refactor
+
 ## 2.0.4
 
 - Adds demo gifs

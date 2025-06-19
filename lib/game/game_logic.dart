@@ -82,15 +82,12 @@ void gameOver({bool isWon = false}) {
     snake.drawKing();
     drawMetadata();
 
-    moveCursor(Point(0, height + 5));
-    clearLine(height + 5);
-    stdout.writeln('You won 🎉');
+    printText(Point(0, height + 4), 'You won 🎉');
   } else {
     snake.drawDead(dir);
     drawMetadata();
-    moveCursor(Point(0, height + 5));
-    clearLine(height + 5);
-    stdout.writeln('Game over 💀');
+
+    printText(Point(0, height + 4), 'Game over 💀');
   }
   exit(0);
 }
