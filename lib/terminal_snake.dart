@@ -1,50 +1,50 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'models/direction.dart';
-import 'models/snake.dart';
-import 'models/food.dart';
-import 'models/game_map.dart';
-import 'game/game_logic.dart';
-import 'game/ui.dart';
-import 'utils/terminal.dart';
+import 'package:terminal_snake/game/game_config.dart';
+import 'package:terminal_snake/models/direction.dart';
+import 'package:terminal_snake/models/food.dart';
+import 'package:terminal_snake/models/game_map.dart';
+import 'package:terminal_snake/models/point.dart';
+import 'package:terminal_snake/models/snake.dart';
+import 'package:terminal_snake/utils/terminal.dart';
+
+part 'game/game_logic.dart';
+part 'game/ui.dart';
 
 late Set<Food> foods;
 late final Snake snake;
 late final GameMap gameMap;
 late bool isPaused = false;
+bool shouldPauseNextFrame = false;
+bool isAutoSpeedGameMode = false;
+bool isBoosting = false;
 
-const int width = 20;
-const int height = 15;
+late int width;
+late int height;
 final inputQueue = <Direction>[];
 Direction dir = Direction.right;
 double speed = 5; // also fps
 
 Timer? updateTimer;
 
-void runGame() {
+void runGame(GameConfig gameConfig) {
   stdin.echoMode = false;
   stdin.lineMode = false;
+
+  width = gameConfig.width;
+  height = gameConfig.height;
+  speed = gameConfig.speed;
+  shouldPauseNextFrame = gameConfig.isPaused;
+  dir = gameConfig.direction;
+  isAutoSpeedGameMode = gameConfig.isAutoSpeedGameMode;
 
   setup();
   resetUpdateTimer();
 
   stdin.listen((List<int> data) {
     for (var byte in data) {
-      handleInput(byte, inputQueue, isPaused);
-      if (byte == 112) {
-        // p key
-        isPaused = !isPaused;
-        pause(height, isPaused);
-      } else if (byte == 43) {
-        // + key
-        speed += 0.5;
-        resetUpdateTimer();
-      } else if (byte == 45) {
-        // - key
-        speed -= 0.5;
-        resetUpdateTimer();
-      }
+      handleInput(byte);
     }
   });
 }
@@ -66,8 +66,6 @@ void setup() {
   foods = {};
   gameMap = GameMap(width, height);
 
-  inputQueue.add(Direction.down);
-
   snake = Snake(gameMap.spawnPoint);
   addNewFood(foods, gameMap);
 
@@ -80,6 +78,11 @@ void update() {
     return;
   }
 
+  if (shouldPauseNextFrame) {
+    isPaused = true;
+    shouldPauseNextFrame = false;
+  }
+
   if (inputQueue.isNotEmpty) {
     final newDir = inputQueue.removeAt(0);
     if (isValidDirection(newDir, dir)) {
@@ -87,8 +90,7 @@ void update() {
     }
   }
 
-  updateDirectionChange(dir, snake, gameMap, foods);
-  gameMap.draw();
+  updateDirectionChange(dir);
   snake.draw();
   foods.forEach((f) => f.draw());
   drawMetadata(height, speed, inputQueue, snake.points.length, isPaused);

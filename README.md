@@ -8,13 +8,13 @@ A terminal-based Snake game written in Dart.
 
 1. Make sure you have Dart installed on your system
 2. Install the package globally:
-   ```bash
-   dart pub global activate --source path .
-   ```
+```bash
+   dart pub global activate terminal_snake
+```
 3. Run the game from anywhere:
-   ```bash
+```bash
    terminal_snake
-   ```
+```
 
 ### Local Development
 
@@ -32,6 +32,7 @@ A terminal-based Snake game written in Dart.
 - `a` - Move left
 - `d` - Move right
 - `p` - Pause/Resume
+- `space` - Boost toggle
 - `q` - Quit
 
 ## Features

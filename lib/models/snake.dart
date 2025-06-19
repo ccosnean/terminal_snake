@@ -10,6 +10,7 @@ class Snake {
     _points.add(head);
   }
 
+  Point? _oldTail;
   Point get head => _points.first;
   Point get tail => _points.last;
   Set<Point> get points => _points.toSet();
@@ -33,12 +34,13 @@ class Snake {
                   : 0),
     );
 
+
     if (walls.contains(newHead) || isCollidingWithPoint(newHead)) {
       return false;
     }
 
     _points.addFirst(newHead);
-    _points.removeLast();
+    _oldTail = _points.removeLast();
 
     return true;
   }
@@ -55,6 +57,16 @@ class Snake {
     return _points.contains(point);
   }
 
+  void drawDead(Direction dir) {
+    final ahead = Point(head.x + (dir == Direction.right ? 1 : dir == Direction.left ? -1 : 0), head.y + (dir == Direction.down ? 1 : dir == Direction.up ? -1 : 0));
+    final right = Point(head.x + (dir == Direction.right ? 1 : dir == Direction.left ? -1 : 0), head.y + (dir == Direction.down ? 1 : dir == Direction.up ? -1 : 0));
+    final left = Point(head.x + (dir == Direction.right ? 1 : dir == Direction.left ? -1 : 0), head.y + (dir == Direction.down ? 1 : dir == Direction.up ? -1 : 0));
+    
+    drawChar(ahead, '💥');
+    drawChar(right, '💥');
+    drawChar(left, '💥');
+  }
+
   void draw() {
     for (var point in _points) {
       if (point == head) {
@@ -62,6 +74,10 @@ class Snake {
       } else {
         drawChar(point, '🟩');
       }
+    }
+
+    if (_oldTail != null) {
+      drawChar(_oldTail!, '  ');
     }
   }
 }

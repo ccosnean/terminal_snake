@@ -45,10 +45,6 @@ class GameMap {
   }
 
   void draw() {
-    for (var point in empty) {
-      drawChar(point, ' ');
-    }
-
     for (var point in walls) {
       drawChar(point, '🟫');
     }

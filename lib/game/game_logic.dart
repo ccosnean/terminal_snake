@@ -1,10 +1,4 @@
-import 'dart:io';
-import '../models/direction.dart';
-import '../models/point.dart';
-import '../models/snake.dart';
-import '../models/food.dart';
-import '../models/game_map.dart';
-import '../utils/terminal.dart';
+part of '../terminal_snake.dart';
 
 bool isValidDirection(Direction newDir, Direction dir) {
   return newDir != dir && (newDir == Direction.up && dir != Direction.down) ||
@@ -13,7 +7,7 @@ bool isValidDirection(Direction newDir, Direction dir) {
       (newDir == Direction.right && dir != Direction.left);
 }
 
-void handleInput(int byte, List<Direction> inputQueue, bool isPaused) {
+void handleInput(int byte) {
   switch (byte) {
     case 119: // w
       inputQueue.add(Direction.up);
@@ -28,7 +22,12 @@ void handleInput(int byte, List<Direction> inputQueue, bool isPaused) {
       inputQueue.add(Direction.right);
       break;
     case 112: // p
-      // pause() will be handled in main
+      pause();
+      break;
+    case 32: // space (boost) reset on release
+      isBoosting = !isBoosting;
+      speed += isBoosting ? 5 : -5;
+      resetUpdateTimer();
       break;
     case 113: // q
       gameOver();
@@ -36,8 +35,7 @@ void handleInput(int byte, List<Direction> inputQueue, bool isPaused) {
   }
 }
 
-void updateDirectionChange(
-    Direction dir, Snake snake, GameMap gameMap, Set<Food> foods) {
+void updateDirectionChange(Direction dir) {
   final didMove = snake.move(
     dir,
     walls: gameMap.walls,
@@ -60,6 +58,11 @@ void eatFood(Point foodPoint, Set<Food> foods, Snake snake, GameMap gameMap) {
   foods.removeWhere((f) => f.point == foodPoint);
   snake.grow();
   gameMap.updateEmptyPoints(snake.points);
+
+  if (isAutoSpeedGameMode) {
+    speed += 0.05;
+    resetUpdateTimer();
+  }
 
   addNewFood(foods, gameMap);
 }

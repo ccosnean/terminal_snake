@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Added console arguments parsing, and usage docs.
+- Exposed most in game variables to the args.
+
 ## 1.0.0
 
 ### Added
