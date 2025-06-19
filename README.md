@@ -3,7 +3,10 @@
 A terminal-based Snake game written in Dart.
 
 Demo:
-![Terminal Snake Demo](demo/demo.gif)
+Loose.
+![Terminal Snake Demo fail](demo/demo1.gif)
+Win.
+![Terminal Snake Demo win](demo/demo2.gif)
 
 ## Installation
 

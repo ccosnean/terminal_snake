@@ -1,3 +1,7 @@
+## 2.0.4
+
+- Adds demo gifs
+
 ## 2.0.3
 
 - Adds demo gif
