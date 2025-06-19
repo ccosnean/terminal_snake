@@ -74,7 +74,7 @@ void setup() {
 
 void update() {
   if (isPaused) {
-    drawMetadata(height, speed, inputQueue, snake.points.length, isPaused);
+    drawMetadata();
     return;
   }
 
@@ -93,5 +93,5 @@ void update() {
   updateDirectionChange(dir);
   snake.draw();
   foods.forEach((f) => f.draw());
-  drawMetadata(height, speed, inputQueue, snake.points.length, isPaused);
+  drawMetadata();
 }

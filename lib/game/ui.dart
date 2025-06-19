@@ -1,7 +1,6 @@
 part of '../terminal_snake.dart';
 
-void drawMetadata(int height, double speed, List<Direction> inputQueue,
-    int score, bool isPaused) {
+void drawMetadata() {
   moveCursor(Point(0, height));
   clearLine(height);
   stdout.write('q: quit, p: pause, w,s,a,d: move, space: 🐌/🚂');
@@ -14,7 +13,7 @@ void drawMetadata(int height, double speed, List<Direction> inputQueue,
       'move queue: {${inputQueue.map((e) => e.toString().replaceAll("Direction.", "")).join(", ")}}');
   moveCursor(Point(0, height + 3));
   clearLine(height + 3);
-  stdout.write('score: ${score}');
+  stdout.write('score: ${snake.points.length}');
 
   moveCursor(Point(0, height + 4));
   clearLine(height + 4);
@@ -27,12 +26,4 @@ void drawMetadata(int height, double speed, List<Direction> inputQueue,
 
 void pause() {
   isPaused = !isPaused;
-
-  moveCursor(Point(0, height + 4));
-  clearLine(height + 4);
-  if (isPaused) {
-    stdout.write('Paused');
-  } else {
-    stdout.write('Playing');
-  }
 }

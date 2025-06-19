@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fixes Game Over ui
+
 ## 2.0.0
 
 - Added console arguments parsing, and usage docs.

@@ -78,8 +78,8 @@ void addNewFood(Set<Food> foods, GameMap gameMap) {
 }
 
 void gameOver({bool isWon = false}) {
-  moveCursor(Point(0, 19));
-  clearLine(19);
+  moveCursor(Point(0, height + 5));
+  clearLine(height + 5);
   if (isWon) {
     stdout.writeln('You won 🎉');
   } else {
