@@ -1,3 +1,7 @@
+## 2.0.3
+
+- Adds demo gif
+
 ## 2.0.2
 
 - Adds death and win ui

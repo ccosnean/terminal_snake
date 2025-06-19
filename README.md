@@ -2,6 +2,9 @@
 
 A terminal-based Snake game written in Dart.
 
+Demo:
+![Terminal Snake Demo](demo/demo.gif)
+
 ## Installation
 
 ### Global Installation (Recommended)
