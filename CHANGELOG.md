@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Adds death and win ui
+
 ## 2.0.1
 
 - Fixes Game Over ui

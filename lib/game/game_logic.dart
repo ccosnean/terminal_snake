@@ -78,11 +78,18 @@ void addNewFood(Set<Food> foods, GameMap gameMap) {
 }
 
 void gameOver({bool isWon = false}) {
-  moveCursor(Point(0, height + 5));
-  clearLine(height + 5);
   if (isWon) {
+    snake.drawKing();
+    drawMetadata();
+
+    moveCursor(Point(0, height + 5));
+    clearLine(height + 5);
     stdout.writeln('You won 🎉');
   } else {
+    snake.drawDead(dir);
+    drawMetadata();
+    moveCursor(Point(0, height + 5));
+    clearLine(height + 5);
     stdout.writeln('Game over 💀');
   }
   exit(0);

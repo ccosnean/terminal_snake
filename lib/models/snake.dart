@@ -34,7 +34,6 @@ class Snake {
                   : 0),
     );
 
-
     if (walls.contains(newHead) || isCollidingWithPoint(newHead)) {
       return false;
     }
@@ -57,14 +56,28 @@ class Snake {
     return _points.contains(point);
   }
 
+  void drawKing() {
+    drawChar(head, '👑');
+  }
+
   void drawDead(Direction dir) {
-    final ahead = Point(head.x + (dir == Direction.right ? 1 : dir == Direction.left ? -1 : 0), head.y + (dir == Direction.down ? 1 : dir == Direction.up ? -1 : 0));
-    final right = Point(head.x + (dir == Direction.right ? 1 : dir == Direction.left ? -1 : 0), head.y + (dir == Direction.down ? 1 : dir == Direction.up ? -1 : 0));
-    final left = Point(head.x + (dir == Direction.right ? 1 : dir == Direction.left ? -1 : 0), head.y + (dir == Direction.down ? 1 : dir == Direction.up ? -1 : 0));
-    
+    final ahead = Point(
+        head.x +
+            (dir == Direction.right
+                ? 1
+                : dir == Direction.left
+                    ? -1
+                    : 0),
+        head.y +
+            (dir == Direction.down
+                ? 1
+                : dir == Direction.up
+                    ? -1
+                    : 0));
+
+
+    drawChar(head, '💀');
     drawChar(ahead, '💥');
-    drawChar(right, '💥');
-    drawChar(left, '💥');
   }
 
   void draw() {
