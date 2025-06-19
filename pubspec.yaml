@@ -1,0 +1,10 @@
+name: terminal_snake
+description: A terminal-based Snake game written in Dart
+version: 1.0.0
+homepage: https://github.com/ccosnean/terminal_snake.git
+
+environment:
+  sdk: ^3.6.1
+
+executables:
+  terminal_snake: terminal_snake
