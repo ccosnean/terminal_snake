@@ -1,3 +1,7 @@
+## 2.0.7
+
+- Changes controls to play one handed
+
 ## 2.0.6
 
 - draws the food position in the belly

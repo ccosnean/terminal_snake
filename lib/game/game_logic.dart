@@ -21,13 +21,13 @@ void handleInput(int byte) {
     case 100: // d
       inputQueue.add(Direction.right);
       break;
-    case 112: // p
-      pause();
-      break;
-    case 32: // space (boost) reset on release
+    case 102: // f boost
       isBoosting = !isBoosting;
       speed += isBoosting ? 5 : -5;
       resetUpdateTimer();
+      break;
+    case 32: // space pause
+      pause();
       break;
     case 113: // q
       gameOver();

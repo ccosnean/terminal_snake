@@ -3,7 +3,7 @@ part of '../terminal_snake.dart';
 void drawMetadata() {
   printText(
     Point(0, height),
-    'q: quit, p: pause, w,s,a,d: move, space: 🐌/🚂',
+    'q: quit, space: pause, w,s,a,d: move, f: 🐌/🚂',
   );
   printText(
     Point(0, height + 1),

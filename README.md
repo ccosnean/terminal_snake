@@ -31,16 +31,6 @@ Win.
    dart run bin/terminal_snake.dart
    ```
 
-## Controls
-
-- `w` - Move up
-- `s` - Move down
-- `a` - Move left
-- `d` - Move right
-- `p` - Pause/Resume
-- `space` - Boost toggle
-- `q` - Quit
-
 ## Features
 
 - Classic Snake gameplay
